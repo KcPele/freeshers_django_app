@@ -20,17 +20,13 @@ def email_contact(request):
 		return redirect('home')
 	else:
 		name_email = request.POST['name']
-		email_sender = request.POST['email']
+		email = request.POST['email']
 		subject = request.POST['subject']
 		message_email = request.POST['message_email']
-		message_email2 = 'We recieved a mail from you saying: \n ' + message_email + ' \n We will get back to you shortly'
+		message_email2 = f'{message_email} from {email}'
 		try:
-			print(f'this is at try: {email_sender}')
-			datatuple = (
-    				(subject, message_email, email_sender, ['fidekg122@gmail.com']),
-    				(subject, message_email2, 'fidekg122@gmail.com', [email_sender]),
-				)
-			send_mass_mail(datatuple)
+			send_mail(subject, message_email2, email, 
+			[settings.EMAIL_HOST_USER], fail_silently=False,)
 			messages.success(request, 'Thanks, A response has been sent to your mail')
 			return redirect('home')
 			
