@@ -22,6 +22,8 @@
 
 
 <body>
+  {% include 'pdf/navbar.html' %}
+  <div style="padding-top: 60px;">
 {% if messages %}
     {% for message in messages %}
       <div style="text-align: center;" class="alert alert-{{ message.tags }}" role="alert">
@@ -33,6 +35,6 @@
 	<div class="container">
 	{% block account %}{% endblock %}
 	</div>
-
+</div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from .models import UploadFile
+from .models import UploadFile, SubscribedEmail
 from django.conf import settings
 from django.core.mail import send_mail, send_mass_mail
 from django.contrib import messages
@@ -43,7 +43,7 @@ def email_subscribe(request):
 		message_email = 'Thank u for subscribing, You will be notified once there is a new material'
 		subject = 'Pdf Subscription'
 		subscribe_email = request.POST['email_subscribe']
-
+		SubscribedEmail.objects.create(email_name=subscribe_email)
 		send_mail(subject, message_email, settings.EMAIL_HOST_USER, 
 			[subscribe_email], fail_silently=False,)
 		messages.success(request, 'Thank you for subscribing, Check your mail or spam box')

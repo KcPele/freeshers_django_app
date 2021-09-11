@@ -7,3 +7,9 @@ class UploadFile(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class SubscribedEmail(models.Model):
+	email_name = models.CharField(max_length=120)
+
+	def __str__(self):
+		return f'emails'
