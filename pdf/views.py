@@ -9,6 +9,18 @@ def home(request):
 	return render(request, 'pdf/base.html')
 
 
+def search_view(request):
+    query = request.GET.get('query')
+    
+    qs = UploadFile.objects.search(query=query)
+    context = {
+        "object_list":qs,
+    }
+   
+    return render(request, 'pdf/search.html', context)
+
+
+
 class ListUploadFile(ListView):
 	paginate_by = 4
 	model = UploadFile

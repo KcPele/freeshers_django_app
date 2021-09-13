@@ -1,0 +1,30 @@
+{% extends 'pdf/base.html' %}
+
+{% block content %}
+<a style="margin-bottom:10px;" class="btn btn-sm btn-outline-primary" href="{% url 'home' %}">Go Back</a>
+  <div class="row" >
+
+{% if object_list %}
+  {% for file in object_list %}
+
+       <div class=" col-md-3 col-sm-6 ">
+        
+        <div class="img-thumbnail" style="margin-bottom: 10px;" >
+
+  <img style="width:100%; height: 100%;" src="{{ file.image.url }}">
+  <div class="">
+    <h5 class="text-center">{{ file.name }}</h5>
+     
+        <a class="btn btn-outline-info btn-sm" style="font-size: 13px;" href="{{ file.pdf.url }}" target="_blank">Preview</a>
+              <a target="_blank" download="{{ file.name }}" class="btn btn-outline-primary btn-sm"  style="font-size: 15px;" href="{{ file.pdf.url }}">Download</a>
+    </div> 
+  </div>
+       </div>
+      
+  {% endfor %}
+  {% endif %}
+  
+ </div>
+  
+
+{% endblock %}
