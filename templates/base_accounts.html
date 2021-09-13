@@ -32,12 +32,8 @@
     {% include 'pdf/navbar.html' %}
     <div style="padding-top: 60px;">
       {% if messages %} {% for message in messages %}
-      <div
-        style="text-align: center;"
-        class="alert alert-{{ message.tags }}"
-        role="alert"
-      >
-        <span class="text-center"> {{ message }}</span>
+      <div id="alert" style="text-align: center;" class="alert alert-{{ message.tags }}" role="alert">
+         <span class="text-center"> {{ message }}</span>
       </div>
       {% endfor %} {% endif %}
       <div class="container">
