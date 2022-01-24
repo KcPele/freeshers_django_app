@@ -22,7 +22,7 @@ def search_view(request):
 
 
 class ListUploadFile(ListView):
-	paginate_by = 4
+	paginate_by = 8
 	model = UploadFile
 
 
