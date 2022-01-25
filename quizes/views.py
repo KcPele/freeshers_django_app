@@ -6,8 +6,7 @@ from django.views.generic import ListView
 from django.views import View
 from django.http import JsonResponse
 from results.models import Result
-from django.contrib.mixins import LoginRequiredMixins
-# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class QuizListView(ListView):
@@ -23,7 +22,7 @@ class QuizView(View):
         return render(request, 'quizes/quiz.html', context)
     
 
-class QuizDataView(LoginRequiredMixins, View):
+class QuizDataView(LoginRequiredMixin, View):
     def get(self, request, pk):
         quiz = Quiz.objects.get(pk=pk)
         questions = []
@@ -37,7 +36,7 @@ class QuizDataView(LoginRequiredMixins, View):
             'time':quiz.time,
         })
 
-class saveQuizView(LoginRequiredMixins, View):
+class saveQuizView(LoginRequiredMixin, View):
     def post(self, request, pk):
         if request.is_ajax():
             questions = []
