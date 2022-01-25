@@ -15,7 +15,7 @@ const activateTimer = time => {
   let displaySeconds;
   let displayMinutes;
 
-  const timer = setInterval(() => {
+  timer = setInterval(() => {
     seconds--;
     if (seconds < 0) {
       seconds = 59;
@@ -96,7 +96,7 @@ const sendData = () => {
     data: data,
     success: function(response) {
       const results = response.results;
-      quizForm.classList.add("invisible");
+      quizForm.classList.add("not-invisible");
       scoreBox.innerHTML = `${
         response.passed ? "Congratulations! " : "Ups..:( "
       } Your result is ${response.score.toFixed(2)}%`;
@@ -106,7 +106,7 @@ const sendData = () => {
         for (const [question, resp] of Object.entries(res)) {
           resDiv.innerHTML += question;
 
-          const cls = ["container", "p-2", "text-light", "h5"];
+          const cls = ["container", "p-3", "text-light", "h3"];
           resDiv.classList.add(...cls);
           console.log(res);
 
@@ -126,10 +126,12 @@ const sendData = () => {
               resDiv.innerHTML += ` | answered: ${answer}`;
             }
           }
-
-          //const body = document.getElementsByTagName("BODY")[0];
-          resultBox.append(resDiv);
         }
+        setTimeout(() => {
+          clearInterval(timer);
+        }, 500);
+        //body = document.getElementsByTagName("BODY")[0];
+        resultBox.append(resDiv);
       });
     },
     error: function(error) {
