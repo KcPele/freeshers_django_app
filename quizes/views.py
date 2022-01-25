@@ -9,11 +9,11 @@ from results.models import Result
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class QuizListView(ListView):
+class QuizListView(ListView, LoginRequiredMixin):
     model = Quiz
     template_name = 'quizes/main.html'
 
-class QuizView(View):
+class QuizView(View, LoginRequiredMixin):
     def get(self, request, pk):
         quiz = Quiz.objects.get(pk=pk)
         context = {
