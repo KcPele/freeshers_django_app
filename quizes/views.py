@@ -22,7 +22,7 @@ class QuizView(View):
         return render(request, 'quizes/quiz.html', context)
     
 
-class QuizDataView(LoginRequiredMixin, View):
+class QuizDataView(View):
     def get(self, request, pk):
         quiz = Quiz.objects.get(pk=pk)
         questions = []
@@ -36,7 +36,7 @@ class QuizDataView(LoginRequiredMixin, View):
             'time':quiz.time,
         })
 
-class saveQuizView(LoginRequiredMixin, View):
+class saveQuizView(View):
     def post(self, request, pk):
         if request.is_ajax():
             questions = []
