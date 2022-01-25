@@ -1,5 +1,6 @@
 {% extends "baseq.html" %} {% load static %}
 <span></span>
+
 {% block scripts %}
 <script src="{% static 'quizes/main.js' %}" defer></script>
 {% endblock scripts %}
@@ -40,10 +41,12 @@
   </div>
 </div>
 
-<div class="h1">E-Tutorial Test/Exam</div>
+
+<div  class="h1">E-Tutorial Test/Exam</div>
 <a class="btn btn-secondary btn-m" href="{% url 'home' %}">Go Home</a>
 <hr />
 {% for obj in object_list %}
+{% if request.user.is_authenticated %}
 <button
   class="btn btn-link model-button"
   data-pk="{{obj.pk}}"
@@ -57,5 +60,12 @@
 >
   {{obj.name}}
 </button>
+{% else %}
+You should be logged in to take the test
+<a href="{% url 'login' %}?next={{request.path}}" class="btn btn-primary">Login</a>
+<div>
+<p>{{obj.name}}</p>
+</div>
+{% endif %}
 <br />
 {% endfor %} {% endblock content %}
