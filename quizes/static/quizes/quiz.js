@@ -4,6 +4,8 @@ const quizBox = document.getElementById("quiz-box");
 const scoreBox = document.getElementById("score-box");
 const resultBox = document.getElementById("result-box");
 const timerBox = document.getElementById("timer-box");
+const backButton = document.getElementById("back-button");
+const saveButton = document.getElementById("save-button");
 const activateTimer = time => {
   if (time.toString().length < 2) {
     timerBox.innerHTML = `<b>0${time}:00</b>`;
@@ -96,7 +98,8 @@ const sendData = () => {
     data: data,
     success: function(response) {
       const results = response.results;
-      quizForm.classList.add("not-invisible");
+      quizForm.classList.add("invisible");
+
       scoreBox.innerHTML = `${
         response.passed ? "Congratulations! " : "Ups..:( "
       } Your result is ${response.score.toFixed(2)}%`;
@@ -127,6 +130,7 @@ const sendData = () => {
             }
           }
         }
+        saveButton.classList.add("invisible");
         setTimeout(() => {
           clearInterval(timer);
         }, 500);
